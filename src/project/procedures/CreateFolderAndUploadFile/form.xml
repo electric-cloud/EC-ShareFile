@@ -1,0 +1,30 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Credential:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the credential that contains the user name and password to ShareFile</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Company Name:</label>
+        <property>company</property>
+        <required>1</required>
+        <documentation>The company name</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Folder to create:</label>
+        <property>folderToCreate</property>
+        <required>1</required>
+        <documentation>Absolute path to the file to upload</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Path to file:</label>
+        <property>pathToFile</property>
+        <required>1</required>
+        <documentation>Absolute path to the file to upload</documentation>
+    </formElement>
+</editor>
