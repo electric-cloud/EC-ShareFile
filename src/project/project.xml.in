@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<exportedData version="68" buildLabel="build_main_87670_2015.03.27_12:11:30" buildVersion="5.4.0.87670" passkey="4b1b442ec256ebadae81d59a5b4d52705556bfec">
+<exportedData version="69" buildLabel="build_main_89270_2015.04.16_07:48:51" buildVersion="5.4.0.89270" passkey="5988fd40f08f691b7b3605f17301cfc761659b8f">
   <exportPath>/projects/@PLUGIN_KEY@</exportPath>
   <project>
     <projectName>@PLUGIN_KEY@</projectName>
@@ -9,6 +9,58 @@
     <workspaceName/>
     <propertySheet>
       <tracked>1</tracked>
+      <property>
+        <propertyName>ui_forms</propertyName>
+        <tracked>1</tracked>
+        <propertySheet>
+          <tracked>1</tracked>
+          <property>
+            <propertyName>createConfigForm</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>1</tracked>
+            <value>&lt;editor&gt;
+    &lt;formElement&gt;
+        &lt;type&gt;entry&lt;/type&gt;
+        &lt;label&gt;Configuration Name:&lt;/label&gt;
+        &lt;property&gt;config&lt;/property&gt;
+        &lt;value&gt;&lt;/value&gt;
+        &lt;required&gt;1&lt;/required&gt;
+    &lt;/formElement&gt;
+    &lt;formElement&gt;
+        &lt;type&gt;credential&lt;/type&gt;
+        &lt;label&gt;Login as:&lt;/label&gt;
+        &lt;property&gt;credential&lt;/property&gt;
+        &lt;value&gt;&lt;/value&gt;
+        &lt;required&gt;0&lt;/required&gt;
+    &lt;/formElement&gt;
+&lt;/editor&gt;</value>
+          </property>
+          <property>
+            <propertyName>editConfigForm</propertyName>
+            <counter>0</counter>
+            <expandable>1</expandable>
+            <tracked>1</tracked>
+            <value>&lt;editor&gt;
+        &lt;formElement&gt;
+        &lt;type&gt;credential&lt;/type&gt;
+        &lt;label&gt;Login as:&lt;/label&gt;
+        &lt;property&gt;credential&lt;/property&gt;
+        &lt;value&gt;&lt;/value&gt;
+        &lt;required&gt;0&lt;/required&gt;
+    &lt;/formElement&gt;
+&lt;/editor&gt;</value>
+          </property>
+        </propertySheet>
+      </property>
+      <property>
+        <propertyName>configureCredentials</propertyName>
+        <counter>0</counter>
+        <description/>
+        <expandable>1</expandable>
+        <tracked>1</tracked>
+        <value>1</value>
+      </property>
       <property>
         <propertyName>ec_visibility</propertyName>
         <counter>0</counter>
@@ -21,7 +73,7 @@
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>8</value>
+        <value>24</value>
       </property>
       <property>
         <propertyName>preamble</propertyName>
@@ -564,14 +616,90 @@ public class ShareFileSample
     }</value>
       </property>
       <property>
+        <propertyName>promoteAction</propertyName>
+        <counter>0</counter>
+        <expandable>0</expandable>
+        <tracked>1</tracked>
+        <value># upgrade action
+if ($upgradeAction eq "upgrade") {
+    my $query = $commander-&gt;newBatch();
+    my $newcfg = $query-&gt;getProperty(
+        "/plugins/$pluginName/project/plugin_cfgs");
+    my $oldcfgs = $query-&gt;getProperty(
+        "/plugins/$otherPluginName/project/plugin_cfgs");
+	my $creds = $query-&gt;getCredentials("\$[/plugins/$otherPluginName]");
+
+	local $self-&gt;{abortOnError} = 0;
+    $query-&gt;submit();
+
+    # if new plugin does not already have cfgs
+    if ($query-&gt;findvalue($newcfg,"code") eq "NoSuchProperty") {
+        # if old cfg has some cfgs to copy
+        if ($query-&gt;findvalue($oldcfgs,"code") ne "NoSuchProperty") {
+            $batch-&gt;clone({
+                path =&gt; "/plugins/$otherPluginName/project/plugin_cfgs",
+                cloneName =&gt; "/plugins/$pluginName/project/plugin_cfgs"
+            });
+        }
+    }
+	
+	# Copy configuration credentials and attach them to the appropriate steps
+    my $nodes = $query-&gt;find($creds);
+    if ($nodes) {
+        my @nodes = $nodes-&gt;findnodes("credential/credentialName");
+        for (@nodes) {
+            my $cred = $_-&gt;string_value;
+
+            # Clone the credential
+            $batch-&gt;clone({
+                path =&gt; "/plugins/$otherPluginName/project/credentials/$cred",
+                cloneName =&gt; "/plugins/$pluginName/project/credentials/$cred"
+            });
+
+            # Make sure the credential has an ACL entry for the new project principal
+            my $xpath = $commander-&gt;getAclEntry("user", "project: $pluginName", {
+                projectName =&gt; $otherPluginName,
+                credentialName =&gt; $cred
+            });
+            if ($xpath-&gt;findvalue("//code") eq "NoSuchAclEntry") {
+                $batch-&gt;deleteAclEntry("user", "project: $otherPluginName", {
+                    projectName =&gt; $pluginName,
+                    credentialName =&gt; $cred
+                });
+                $batch-&gt;createAclEntry("user", "project: $pluginName", {
+                    projectName =&gt; $pluginName,
+                    credentialName =&gt; $cred,
+                    readPrivilege =&gt; "allow",
+                    modifyPrivilege =&gt; "allow",
+                    executePrivilege =&gt; "allow",
+                    changePermissionsPrivilege =&gt; "allow"
+                });
+            }
+
+# Attach the credential to the appropriate steps
+            $batch-&gt;attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName =&gt; "XXXXX",
+                stepName =&gt; "XXXXXX"
+            });
+
+        }
+    }
+}
+</value>
+      </property>
+      <property>
         <propertyName>version</propertyName>
         <counter>0</counter>
-        <description/>
+        <description>Version of the EC-Sharefile project
+
+History:
+- version 1.1.0
+    + Added credential configuration management</description>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>1.0.0</value>
+        <value>1.0.1</value>
       </property>
-    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value></property><property><propertyName>project_version</propertyName><value>@PLUGIN_VERSION@</value></property></propertySheet>
+    <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>@PLUGIN_VERSION@</value></property></propertySheet>
     <credential>
       <credentialName>sharefileCredential</credentialName>
       <description/>
@@ -583,7 +711,77 @@ public class ShareFileSample
       </propertySheet>
     </credential>
     <procedure>
-      <procedureName>CreateFolderAndUploadFile</procedureName>
+      <procedureName>createConfiguration</procedureName>
+      <description>Created by EC-Admin to manage credential configuration</description>
+      <tracked>1</tracked>
+      <propertySheet>
+        <tracked>1</tracked>
+      </propertySheet>
+      <formalParameter>
+        <formalParameterName>config</formalParameterName>
+        <description>Configuration Name</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>1</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>credential</formalParameterName>
+        <expansionDeferred>0</expansionDeferred>
+        <required>0</required>
+        <tracked>1</tracked>
+        <type>credential</type>
+      </formalParameter>
+      <step>
+        <stepName>CreateConfiguration</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <description>Create a EC-Sharefile configuration</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <postProcessor>postp</postProcessor>
+        <releaseMode>none</releaseMode>
+        <shell>ec-perl</shell>
+        <timeLimit>5</timeLimit>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>1</tracked>
+        <propertySheet>
+          <tracked>1</tracked>
+        </propertySheet>
+      </step>
+      <step>
+        <stepName>createAndAttachCredential</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition/>
+        <description/>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell>ec-perl</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>1</tracked>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+          <tracked>1</tracked>
+        </propertySheet>
+        <attachedParameters>
+          <formalParameterName>credential</formalParameterName>
+        </attachedParameters>
+      </step>
+    </procedure>
+    <procedure>
+      <procedureName>createFolderAndUploadFile</procedureName>
       <description/>
       <jobNameTemplate/>
       <resourceName/>
@@ -785,6 +983,41 @@ public class ShareFileSample
         <attachedCredentials>
           <credentialName>sharefileCredential</credentialName>
         </attachedCredentials>
+      </step>
+    </procedure>
+    <procedure>
+      <procedureName>DeleteConfiguration</procedureName>
+      <description>Created by EC-Admin to manage credential configuration</description>
+      <tracked>1</tracked>
+      <propertySheet>
+        <tracked>1</tracked>
+      </propertySheet>
+      <formalParameter>
+        <formalParameterName>config</formalParameterName>
+        <description>Configuration Name</description>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+        <tracked>1</tracked>
+        <type>entry</type>
+      </formalParameter>
+      <step>
+        <stepName>DeleteConfiguration</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <description>Delete a EC-ShareFile configuration</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <parallel>0</parallel>
+        <postProcessor>postp</postProcessor>
+        <releaseMode>none</releaseMode>
+        <shell>ec-perl</shell>
+        <timeLimit>5</timeLimit>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>1</tracked>
+        <propertySheet>
+          <tracked>1</tracked>
+        </propertySheet>
       </step>
     </procedure>
   </project>

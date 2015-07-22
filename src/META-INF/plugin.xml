@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-ShareFile</key>
-  <version>1.0.0.8</version>
+  <version>1.0.1.24</version>
   <label>EC-ShareFile</label>
-  <description>A plugin to interact with Citrix ShareFile
-2015-03-29 admin Initial release</description>
-  <author>N. Vaze</author>
-  <authorUrl>mailto:nvaze@electric-cloud.com</authorUrl>
+  <description>Integrates Citrix ShareFile with Electric Commander.</description>
+  <author>L. Rochette</author>
+  <authorUrl>mailto:lrochette@electric-cloud.com</authorUrl>
 
   <commander-version min="4.1"/>
 
+  <configure>configurations.xml</configure>
+  <components>
+      <component name="ConfigurationManagement">
+          <javascript>war/ecplugins.ShareFile.ConfigurationManagement/ecplugins.ShareFile.ConfigurationManagement.nocache.js</javascript>
+      </component>
+  </components>
     <!-- Specify a category for this plugin; this is used in filtered lists in the Plugin Manager.
          Typically, it is set to System or Step.
      -->
-  <category>Other</category>
- 	  <depends>EC-Core</depends>
+  <category>Administration</category>
+  <depends>EC-Core</depends>
 </plugin>
