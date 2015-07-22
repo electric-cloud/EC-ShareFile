@@ -57,8 +57,8 @@ if ($upgradeAction eq "upgrade") {
 
 # Attach the credential to the appropriate steps
             $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
-                procedureName => "XXXXX",
-                stepName => "XXXXXX"
+                procedureName => "createFolderAndUploadFile",
+                stepName => "createFolderAndUploadFile"
             });
 
         }

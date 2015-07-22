@@ -73,7 +73,7 @@
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>24</value>
+        <value>27</value>
       </property>
       <property>
         <propertyName>preamble</propertyName>
@@ -618,6 +618,7 @@ public class ShareFileSample
       <property>
         <propertyName>promoteAction</propertyName>
         <counter>0</counter>
+        <description/>
         <expandable>0</expandable>
         <tracked>1</tracked>
         <value># upgrade action
@@ -678,8 +679,8 @@ if ($upgradeAction eq "upgrade") {
 
 # Attach the credential to the appropriate steps
             $batch-&gt;attachCredential("\$[/plugins/$pluginName/project]", $cred, {
-                procedureName =&gt; "XXXXX",
-                stepName =&gt; "XXXXXX"
+                procedureName =&gt; "createFolderAndUploadFile",
+                stepName =&gt; "createFolderAndUploadFile"
             });
 
         }
@@ -700,16 +701,6 @@ History:
         <value>1.0.1</value>
       </property>
     <property><propertyName>ec_setup</propertyName><value>PLACEHOLDER</value><expandable>0</expandable></property><property><propertyName>project_version</propertyName><value>@PLUGIN_VERSION@</value></property></propertySheet>
-    <credential>
-      <credentialName>sharefileCredential</credentialName>
-      <description/>
-      <password>hnW0bg6/XvSDvhVeUtHjGlPLJ2boF75vFngwIJsarDyNDCSclvDKIowD52XKTJ3K</password>
-      <tracked>1</tracked>
-      <userName>nvaze@electric-cloud.com</userName>
-      <propertySheet>
-        <tracked>1</tracked>
-      </propertySheet>
-    </credential>
     <procedure>
       <procedureName>createConfiguration</procedureName>
       <description>Created by EC-Admin to manage credential configuration</description>
@@ -980,9 +971,6 @@ History:
         <propertySheet>
           <tracked>1</tracked>
         </propertySheet>
-        <attachedCredentials>
-          <credentialName>sharefileCredential</credentialName>
-        </attachedCredentials>
       </step>
     </procedure>
     <procedure>
