@@ -5,20 +5,20 @@
 
   <!-- Plugin-specific properties -->
   <property name="pluginKey" value="EC-ShareFile" />
-  <property name="pluginVersion" value="1.0.1.27" />
+  <property name="pluginVersion" value="1.1.0.21" />
 
   
   <!-- Java code specific properties -->
   <property name="gwtModules" value="ecplugins.ShareFile.ConfigurationManagement" />
   <path id="extras">
     <pathelement location="/opt/electriccloud/CommanderSDK/lib/commander-client.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/ec_internal.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/gin-2.1.1.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/gwtp-all-0.8-PATCH5.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/javax.inject.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/guice-assistedinject.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/guice.jar"/>
-    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.9.3.296/lib5/annotations.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/ec_internal.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/gin-2.1.1.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/gwtp-all-0.8-PATCH5.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/javax.inject.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/guice-assistedinject.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/guice.jar"/>
+    <pathelement location="/opt/electriccloud/electriccommander/plugins/EC-Admin-2.12.1.304/lib5/annotations.jar"/>
 
   </path>
   <property name="gwt.path.extras" value="extras" />
