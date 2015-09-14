@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-ShareFile</key>
-  <version>1.1.1.24</version>
+  <version>1.1.1.25</version>
   <label>EC-ShareFile</label>
   <description>Integrates Citrix ShareFile with Electric Commander.</description>
   <help>help.xml</help>
