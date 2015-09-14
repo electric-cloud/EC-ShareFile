@@ -69,11 +69,110 @@
         <value>pickListOnly</value>
       </property>
       <property>
+        <propertyName>help</propertyName>
+        <counter>0</counter>
+        <description>The help page for the EC-ShareFile plugin</description>
+        <expandable>1</expandable>
+        <tracked>1</tracked>
+        <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;meta content="text/html; charset=us-ascii" http-equiv="content-type" /&gt;
+    &lt;title&gt;EC-ShareFile Plugin&lt;/title&gt;
+    &lt;link rel="stylesheet" href= "../../plugins/@PLUGIN_NAME@/pluginhelp.css" type="text/css" media= "screen" /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class="help"&gt;
+        &lt;h1&gt;EC-ShareFile&lt;/h1&gt;
+		&lt;p&gt;Plugin Version @PLUGIN_VERSION@&lt;/p&gt;
+        &lt;hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" /&gt;
+
+        &lt;p&gt;EC-ShareFile is a collection of procedures to help you
+interact with Citrix ShareFile. &lt;/br&gt;
+		&lt;b&gt;Note:this plugin was part of the bundle who helped Laurent Rochette and Nikhil Vaze won "Best in Show" at the Citrix Synergy 2015 conference.&lt;/b&gt; 
+		&lt;/p&gt;
+
+		&lt;h2&gt;ElectricFlow Integration to Citrix ShareFile&lt;/h2&gt;
+
+		&lt;p&gt;The plugin interacts with the ShareFile REST API.&lt;/p&gt;
+
+		&lt;h1&gt;Plugin Procedures&lt;/h1&gt;
+
+	    &lt;p&gt;
+	        IMPORTANT: For all parameter descriptions below, required
+	        parameters are shown in &lt;span class="required"&gt;bold
+	        italics&lt;/span&gt;.
+	    &lt;/p&gt;
+
+	    &lt;div id="CreateConfiguration"&gt;&lt;a name="CreateConfiguration" id="CreateConfiguration"&gt;&lt;/a&gt;
+    
+    	&lt;h2&gt;Plugin Configuration&lt;/h2&gt;
+
+        &lt;p&gt;
+        Plugin configurations are sets of parameters that apply
+        across some or all of the plugin's procedures. They are
+        intended to reduce repetition of common values, create
+        predefined sets of parameters for end users, and to
+        securely store credentials where needed. Each configuration
+        is given a unique name that is entered in designated
+        parameters on procedures that use them.&lt;br /&gt;
+         Plugin configurations are created by going to the Electric
+        Commander "Administration" tab, then to the "Plugins"
+        sub-tab. On the right side of the line for the specific
+        plugin, there is a "Configure" link which will open the
+        Configuration page.
+    	&lt;/p&gt;
+
+	    &lt;table class="grid"&gt;
+	        &lt;thead&gt;
+	            &lt;tr&gt;
+	                &lt;th&gt;Parameter&lt;/th&gt;
+
+	                &lt;th&gt;Description&lt;/th&gt;
+	            &lt;/tr&gt;
+	        &lt;/thead&gt;
+
+	        &lt;tbody&gt;
+	            &lt;tr&gt;
+	                &lt;td class="required"&gt;Configuration Name&lt;/td&gt;
+	                &lt;td&gt;Provide a unique name for the configuration.
+	                (Required)&lt;/td&gt;
+	            &lt;/tr&gt;
+	            &lt;tr&gt;
+	                &lt;td class="required"&gt;User Name&lt;/td&gt;
+	                &lt;td&gt;Provide the user login ID. Remember that login
+	                IDs are case sensitive. (Required)&lt;/td&gt;
+	            &lt;/tr&gt;
+	            &lt;tr&gt;
+	                &lt;td class="required"&gt;Password&lt;/td&gt;
+	                &lt;td&gt;Provide the user-specified password.
+	                (Required)&lt;/td&gt;
+	            &lt;/tr&gt;
+	        &lt;/tbody&gt;
+    	&lt;/table&gt;
+    	&lt;img src="../../plugins/@PLUGIN_KEY@/images/help/configuration.png" alt="form" border="1"/&gt;&lt;/div&gt;
+
+    	&lt;h2&gt;createFolderAndUploadFile&lt;/h2&gt;
+
+    	&lt;p&gt;This procedure is used to upload a bundle of file to your ShareFile directory. 
+    		It is called
+    	automatically by &lt;a href="/commander/pages/EC-Support/help"&gt;EC-Support&lt;/a&gt; 
+    	plugins and is not designed to be used directly but nothing prevents 
+    	you to encapsulate it in your own process if you so desire.&lt;/p&gt;
+
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+      </property>
+      <property>
         <propertyName>pluginBuildNumber</propertyName>
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>22</value>
+        <value>23</value>
       </property>
       <property>
         <propertyName>preamble</propertyName>
@@ -694,11 +793,14 @@ if ($upgradeAction eq "upgrade") {
         <description>Version of the EC-Sharefile project
 
 History:
+- version 1.1.1
+    + Added help page
+
 - version 1.1.0
     + Added credential configuration management</description>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>1.1.0</value>
+        <value>1.1.1</value>
       </property>
       <property>
         <propertyName>visibility</propertyName>

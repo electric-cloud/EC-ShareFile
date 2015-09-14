@@ -87,7 +87,7 @@ sub main() {
 ################################
 sub getCfgList {
 
-    my $gcfg = new ElectricCommander::PropDB($::ec,"/projects/EC-ShareFile-1.1.0.22/plugin_cfgs");
+    my $gcfg = new ElectricCommander::PropDB($::ec,"/projects/EC-ShareFile-1.1.1.23/plugin_cfgs");
 
     my %cfgs = $gcfg->getRows();
     # print results as XML block

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
   <key>EC-ShareFile</key>
-  <version>1.1.0.22</version>
+  <version>1.1.1.23</version>
   <label>EC-ShareFile</label>
   <description>Integrates Citrix ShareFile with Electric Commander.
-2015-08-21 admin 5.4 build</description>
+2015-09-14 admin Added help page</description>
+  <help>help.xml</help>
   <author>N. Vaze</author>
   <authorUrl>mailto:nvaze@electric-cloud.com</authorUrl>
 

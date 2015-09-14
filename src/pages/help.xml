@@ -1,22 +1,92 @@
-	
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <meta content="text/html; charset=us-ascii" http-equiv="content-type" />
-
-    <title>Electric Commander Plugin for EC-ShareFile</title>
+    <title>EC-ShareFile Plugin</title>
     <link rel="stylesheet" href= "../../plugins/@PLUGIN_NAME@/pluginhelp.css" type="text/css" media= "screen" />
 </head>
 
 <body>
     <div class="help">
-      <h1>@PLUGIN_KEY@</h1>
-      <p>Plugin Version @PLUGIN_VERSION@</p>
-      <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
+        <h1>EC-ShareFile</h1>
+		<p>Plugin Version @PLUGIN_VERSION@</p>
+        <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
-      <p>This is where your help should go.</p>
-    </div>
+        <p>EC-ShareFile is a collection of procedures to help you
+interact with Citrix ShareFile. </br>
+		<b>Note:this plugin was part of the bundle who helped Laurent Rochette and Nikhil Vaze won "Best in Show" at the Citrix Synergy 2015 conference.</b> 
+		</p>
+
+		<h2>ElectricFlow Integration to Citrix ShareFile</h2>
+
+		<p>The plugin interacts with the ShareFile REST API.</p>
+
+		<h1>Plugin Procedures</h1>
+
+	    <p>
+	        IMPORTANT: For all parameter descriptions below, required
+	        parameters are shown in <span class="required">bold
+	        italics</span>.
+	    </p>
+
+	    <div id="CreateConfiguration"><a name="CreateConfiguration" id="CreateConfiguration"></a>
+    
+    	<h2>Plugin Configuration</h2>
+
+        <p>
+        Plugin configurations are sets of parameters that apply
+        across some or all of the plugin's procedures. They are
+        intended to reduce repetition of common values, create
+        predefined sets of parameters for end users, and to
+        securely store credentials where needed. Each configuration
+        is given a unique name that is entered in designated
+        parameters on procedures that use them.<br />
+         Plugin configurations are created by going to the Electric
+        Commander "Administration" tab, then to the "Plugins"
+        sub-tab. On the right side of the line for the specific
+        plugin, there is a "Configure" link which will open the
+        Configuration page.
+    	</p>
+
+	    <table class="grid">
+	        <thead>
+	            <tr>
+	                <th>Parameter</th>
+
+	                <th>Description</th>
+	            </tr>
+	        </thead>
+
+	        <tbody>
+	            <tr>
+	                <td class="required">Configuration Name</td>
+	                <td>Provide a unique name for the configuration.
+	                (Required)</td>
+	            </tr>
+	            <tr>
+	                <td class="required">User Name</td>
+	                <td>Provide the user login ID. Remember that login
+	                IDs are case sensitive. (Required)</td>
+	            </tr>
+	            <tr>
+	                <td class="required">Password</td>
+	                <td>Provide the user-specified password.
+	                (Required)</td>
+	            </tr>
+	        </tbody>
+    	</table>
+    	<img src="../../plugins/@PLUGIN_KEY@/images/help/configuration.png" alt="form" border="1"/></div>
+
+    	<h2>createFolderAndUploadFile</h2>
+
+    	<p>This procedure is used to upload a bundle of file to your ShareFile directory. 
+    		It is called
+    	automatically by <a href="/commander/pages/EC-Support/help">EC-Support</a> 
+    	plugins and is not designed to be used directly but nothing prevents 
+    	you to encapsulate it in your own process if you so desire.</p>
+
+	</div>
 </body>
 </html>
