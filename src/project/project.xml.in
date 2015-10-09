@@ -172,7 +172,7 @@ interact with Citrix ShareFile. &lt;/p&gt;
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>25</value>
+        <value>32</value>
       </property>
       <property>
         <propertyName>preamble</propertyName>
@@ -793,6 +793,9 @@ if ($upgradeAction eq "upgrade") {
         <description>Version of the EC-Sharefile project
 
 History:
+- version 1.2.0
+    + Add postp to fix #3
+
 - version 1.1.1
     + Added help page
 
@@ -800,7 +803,7 @@ History:
     + Added credential configuration management</description>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>1.1.1</value>
+        <value>1.2.0</value>
       </property>
       <property>
         <propertyName>visibility</propertyName>
@@ -1067,7 +1070,7 @@ History:
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
         <parallel>0</parallel>
-        <postProcessor>postp</postProcessor>
+        <postProcessor>postp  --require "OK:"</postProcessor>
         <precondition/>
         <releaseMode>none</releaseMode>
         <resourceName/>

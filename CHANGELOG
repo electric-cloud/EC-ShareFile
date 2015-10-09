@@ -1,14 +1,17 @@
-2015-09-14 System Administrator <>
-  * 1.1.1.23: Added help page
+2015-10-08 Laurent Rochette <lrochette@electric-cloud.com>
+  * 1.2.0.32: Add postp to fix #3
 
-2015-08-21 System Administrator <>
+2015-09-14 System Administrator <lrochette@electric-cloud.com>
+  * 1.1.1.25: Added help page
+
+2015-08-21 System Administrator <lrochette@electric-cloud.com>
   * 1.1.0.22: 5.4 build
 
-2015-08-21 System Administrator <>
+2015-08-21 System Administrator <lrochette@electric-cloud.com>
   * 1.1.0.21: 5.4 build
 
-2015-07-22 System Administrator <>
+2015-07-22 System Administrator <lrochette@electric-cloud.com>
   * 1.0.1.25: Fixed promoteAction
 
-2015-03-29 System Administrator <>
+2015-03-29 System Administrator <lrochette@electric-cloud.com>
   * 1.0.0.8: Initial release

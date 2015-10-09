@@ -5,7 +5,7 @@
 
   <!-- Plugin-specific properties -->
   <property name="pluginKey" value="EC-ShareFile" />
-  <property name="pluginVersion" value="1.1.1.25" />
+  <property name="pluginVersion" value="1.2.0.32" />
 
   
   <!-- Java code specific properties -->
