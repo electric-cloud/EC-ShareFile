@@ -1,9 +1,9 @@
 <page>
   <componentContainer>
     <title>EC-ShareFile Configuration</title>
-    <helpLink>/pages/EC-ShareFile-1.2.0.32/help</helpLink>
+    <helpLink>/pages/EC-ShareFile-1.2.1.33/help</helpLink>
     <component plugin="EC-ShareFile"
-               version="1.2.0.32"
+               version="1.2.1.33"
                ref="ConfigurationManagement">
         <panel>list</panel>
     </component>

@@ -11,6 +11,7 @@
         <label>Company Name:</label>
         <property>company</property>
         <required>1</required>
+       <value>electric-cloud</value>
         <documentation>The company name</documentation>
     </formElement>
     <formElement>

@@ -172,7 +172,7 @@ interact with Citrix ShareFile. &lt;/p&gt;
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>32</value>
+        <value>33</value>
       </property>
       <property>
         <propertyName>preamble</propertyName>
@@ -776,12 +776,15 @@ if ($upgradeAction eq "upgrade") {
                 });
             }
 
-# Attach the credential to the appropriate steps
+            # Attach the credential to the appropriate steps
             $batch-&gt;attachCredential("\$[/plugins/$pluginName/project]", $cred, {
                 procedureName =&gt; "createFolderAndUploadFile",
                 stepName =&gt; "createFolderAndUploadFile"
             });
-
+            $batch-&gt;attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName =&gt; "createFolderAndUploadFile",
+                stepName =&gt; "checkConfiguration"
+            });
         }
     }
 }
@@ -793,6 +796,8 @@ if ($upgradeAction eq "upgrade") {
         <description>Version of the EC-Sharefile project
 
 History:
+- version 1.2.1
+    + Add configuration checking
 - version 1.2.0
     + Add postp to fix #3
 
@@ -803,7 +808,7 @@ History:
     + Added credential configuration management</description>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>1.2.0</value>
+        <value>1.2.1</value>
       </property>
       <property>
         <propertyName>visibility</propertyName>
@@ -1025,7 +1030,7 @@ History:
       </propertySheet>
       <formalParameter>
         <formalParameterName>company</formalParameterName>
-        <defaultValue/>
+        <defaultValue>electric-cloud</defaultValue>
         <description/>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
@@ -1043,7 +1048,7 @@ History:
       </formalParameter>
       <formalParameter>
         <formalParameterName>folderToCreate</formalParameterName>
-        <defaultValue/>
+        <defaultValue>/clients/S-U/test</defaultValue>
         <description/>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
@@ -1059,6 +1064,31 @@ History:
         <tracked>1</tracked>
         <type>entry</type>
       </formalParameter>
+      <step>
+        <stepName>checkConfiguration</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command>PLACEHOLDER</command>
+        <condition/>
+        <description>Verify the configuration exists</description>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor/>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell>ec-perl</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+        <tracked>1</tracked>
+        <workingDirectory/>
+        <workspaceName/>
+        <propertySheet>
+          <tracked>1</tracked>
+        </propertySheet>
+      </step>
       <step>
         <stepName>createFolderAndUploadFile</stepName>
         <alwaysRun>0</alwaysRun>

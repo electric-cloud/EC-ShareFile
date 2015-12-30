@@ -46,6 +46,11 @@ $errors .= $ec->checkAllErrors($xpath);
      stepName => "createFolderAndUploadFile"});
     $errors .= $ec->checkAllErrors($xpath);
 
+    $xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "createFolderAndUploadFile",
+     stepName => "checkConfiguration"});
+    $errors .= $ec->checkAllErrors($xpath);
+
 
 #if errors
     if ("$errors" ne "") {
