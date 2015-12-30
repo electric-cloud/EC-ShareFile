@@ -172,7 +172,7 @@ interact with Citrix ShareFile. &lt;/p&gt;
         <counter>0</counter>
         <expandable>1</expandable>
         <tracked>1</tracked>
-        <value>33</value>
+        <value>34</value>
       </property>
       <property>
         <propertyName>preamble</propertyName>
@@ -1071,7 +1071,7 @@ History:
         <command>PLACEHOLDER</command>
         <condition/>
         <description>Verify the configuration exists</description>
-        <errorHandling>failProcedure</errorHandling>
+        <errorHandling>abortProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
         <parallel>0</parallel>
