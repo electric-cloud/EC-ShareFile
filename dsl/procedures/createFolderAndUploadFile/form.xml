@@ -1,0 +1,16 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Zendesk Configuration:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the Zendesk configuration that contains information to connect to ShareFile</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Path to file:</label>
+        <property>pathToFile</property>
+        <required>1</required>
+        <documentation>Absolute path to the file to upload</documentation>
+    </formElement>
+</editor>
