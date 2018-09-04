@@ -13,4 +13,19 @@
         <required>1</required>
         <documentation>Absolute path to the file to upload</documentation>
     </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Path to file:</label>
+        <property>pathToFile</property>
+        <required>1</required>
+        <documentation>Absolute path to the file to upload</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Folder to create:</label>
+        <property>folder</property>
+        <required>1</required>
+        <value>subdir1</value>
+        <documentation>Directory to create in the top folder specified in the configuration</documentation>
+    </formElement>
 </editor>

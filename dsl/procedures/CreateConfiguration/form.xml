@@ -41,9 +41,9 @@
     <formElement>
         <type>entry</type>
         <label>Folder</label>
-        <property>folder</property>
+        <property>topFolder</property>
         <required>1</required>
-        <documentation>Your company folder in Sharefile to where to upload files</documentation>
+        <documentation>Your company folder in Sharefile in which to upload files</documentation>
     </formElement>
     <formElement>
         <type>entry</type>

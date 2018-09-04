@@ -10,9 +10,13 @@ $[/myProject/preamble]
     def userName = resp.credential.userName
     def password = resp.credential.password
 
-    def company=ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/company").value
+    def company=ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/company").property.value
+    println "Company: $company"
 
-    def folderToCreate = ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/folder").value
+    def folderToCreate = ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/folder").property.value
+    folderToCreate += "/$[folder]"
+    println("Folder: $folderToCreate")
+
     def list = folderToCreate.split("/")
     def lastItem = list.last()
     def path = folderToCreate - ~/$lastItem/
