@@ -1,0 +1,103 @@
+# -*-Perl-*-
+
+# EC-Sharefilet.ntest -
+#
+# Exercise basic components of EC-Sharefile plugin
+#
+# Copyright (c) 2018 Electric Cloud, Inc.
+# All rights reserved
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+use strict;
+use warnings;
+use ECTest;
+
+initCommander();
+$::N=$adminSession;
+
+my $pluginKey = "EC-Sharefile";
+my $xpath = $::N->getPlugin($pluginKey);
+my $pluginName = $xpath->findnode("//pluginName")->value;
+
+#-------------------------------------------------------------------------------
+# Test permissions and visibility, which should be set regardless of whether the
+# plugin is promoted or not.
+#-------------------------------------------------------------------------------
+ntest "install", {}, sub {
+    # Start out with the demoted plugin
+    assertOK($::N->promotePlugin($pluginName, {promoted => 0}));
+
+};
+
+#-------------------------------------------------------------------------------
+# Test promote & demote behavior.
+#-------------------------------------------------------------------------------
+ntest "promote", {}, sub {
+    # Start out with the demoted plugin
+    assertOK($::N->promotePlugin($pluginName, {promoted => 0}));
+
+    # Make sure the plugin's ec_setup script exists
+    assertOK($xpath = $::N->getProperty("/projects/$pluginName/ec_setup",
+                                      {expand => 0}),
+             "ec_setup property exists");
+    assertNe("", $xpath->findvalue("//value")->value,
+             "ec_setup script not empty");
+
+    # Promote the plugin
+    assertOK($::N->promotePlugin($pluginName));
+
+    # Demote the plugin
+    assertOK($::N->promotePlugin($pluginName, {promoted => 0}));
+};
+
+# Ensure the plugin is promoted for later tests
+$::N->promotePlugin($pluginName);
+
+#-------------------------------------------------------------------------------
+# Test procedure present.
+#-------------------------------------------------------------------------------
+ntest "procedures", {}, sub {
+  assertOK($::N->getProcedure($pluginName, "CreateConfiguration"), "procedure CreateConfiguration missing");
+  assertOK($::N->getProcedure($pluginName, "DeleteConfiguration"), "procedure DeleteConfiguration missing");
+  assertOK($::N->getProcedure($pluginName, "createFolderAndUploadFile"), "procedure createFolderAndUploadFile missing");
+};
+
+#-------------------------------------------------------------------------------
+# Issue #1: wrong password sahould fails
+#-------------------------------------------------------------------------------
+ntest "Issue_1 incorrect password", {}, sub {
+  # Create new configuration
+  my $xpath = $::N->runProcedure($pluginName, {
+      procedureName=>"CreateConfiguration",
+      actualParameter=>[
+          {actualParameterName=>"config", value=>"issue_1"},
+          {actualParameterName=>"description", value=>"For automatic testing"},
+          {actualParameterName=>"credential", value=>"foo"},
+          {actualParameterName=>"folder", value=>"employees/lrochette"},
+          {actualParameterName=>"company", value=>"electric-cloud"}
+      ]});
+  assertOK($xpath, "Failed to create configuration");
+
+  # Delete Configuration
+  $xpath = $::N->runProcedure($pluginName, {
+      procedureName=>"DeleteConfiguration",
+      actualParameter=>[
+          {actualParameterName=>"config", value=>"issue_1"},
+      ]});
+  assertOK($xpath, "Failed to delete configuration");
+};
+
+
+1;

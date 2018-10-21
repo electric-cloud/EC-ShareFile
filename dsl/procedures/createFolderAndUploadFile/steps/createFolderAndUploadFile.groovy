@@ -13,7 +13,7 @@ $[/myProject/preamble]
     def company=ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/company").property.value
     println "Company: $company"
 
-    def folderToCreate = ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/folder").property.value
+    def folderToCreate = ef.getProperty(propertyName:"/myProject/ec_plugin_cfgs/$[config]/topFolder").property.value
     folderToCreate += "/$[folder]"
     println("Folder: $folderToCreate")
 
